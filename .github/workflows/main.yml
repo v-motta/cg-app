@@ -1,7 +1,5 @@
 name: Publish to my environment
 
-run-name: ${{ github.repository }} repository name
-
 on:
   push:
     branches:
