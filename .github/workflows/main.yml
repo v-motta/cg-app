@@ -23,4 +23,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          timeout: 10m
           script: sh ~/bin/traefik/run-cg-app-react.sh
