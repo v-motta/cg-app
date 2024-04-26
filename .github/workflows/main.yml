@@ -13,8 +13,5 @@ jobs:
       - name: git-checkout
         uses: actions/checkout@v3
 
-      - name: Install all dependencies
-        run: npm install
-
-      - name: Build the project
-        run: npm run build
+      - name: Build Docker image
+        run: docker build -t ${{ github.repository }} .
