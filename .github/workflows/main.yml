@@ -1,0 +1,22 @@
+name: Publish to my environment
+
+run-name: ${{ github.repository }} repository name
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: A job to deploy to my environment
+    steps:
+      - name: git-checkout
+        uses: actions/checkout@v3
+
+      - name: Install all dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
