@@ -51,7 +51,11 @@ function CardLogin() {
           <div className="space-y-1">
             <Label htmlFor="username">Usuário</Label>
             <Input
-              {...register("username", { required: true, minLength: 3 })}
+              {...register("username", {
+                required: true,
+                minLength: 3,
+                maxLength: 50,
+              })}
               id="username"
               type="text"
               placeholder="costguardian"
@@ -65,10 +69,28 @@ function CardLogin() {
                 Digite mais de 3 caracteres
               </small>
             )}
+            {errors.username?.type === "maxLength" && (
+              <small className="text-red-600">
+                Digite menos de 50 caracteres
+              </small>
+            )}
           </div>
           <div className="space-y-1">
             <Label htmlFor="password">Senha</Label>
-            <Input id="password" type="password" />
+            <Input
+              {...register("password", { required: true, minLength: 8 })}
+              id="password"
+              type="password"
+              className={errors.username && "border-red-600"}
+            />
+            {errors.password?.type === "required" && (
+              <small className="text-red-600">Preencha este campo</small>
+            )}
+            {errors.password?.type === "minLength" && (
+              <small className="text-red-600">
+                Digite mais de 8 caracteres
+              </small>
+            )}
           </div>
           <div className="flex flex-col sm:flex-row items-center sm:items-end justify-between space-y-2 sm:space-y-0">
             <div className="flex items-center space-x-2 mt-3">
