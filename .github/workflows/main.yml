@@ -17,7 +17,11 @@ jobs:
         run: docker build -t ${{ github.repository }} .
 
       - name: Copy file to the server
-        run: scp -i ${{ secrets.SSH_KEY }} -r ./* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/path/to/your/server
-
-      - name: Run command on the server
-        run: ssh -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /path/to/your/server && docker-compose up -d'
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "docker-compose.yml"
+          target: "/home/ubuntu/docker-compose.yml"
