@@ -23,4 +23,13 @@ jobs:
           tags: cg-app-react:latest
 
       - name: Copy Docker image to remote host
-        run: scp -o StrictHostKeyChecking=no -r cg-app-react:latest ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/bin/traefik
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "cg-app-react:latest"
+          target: "~/bin/traefik"
+
+      # - name: Copy Docker image to remote host
+      #   run: scp -o StrictHostKeyChecking=no -r cg-app-react:latest ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/bin/traefik
