@@ -3,7 +3,10 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - prd
+  pull_request:
+    branches:
+      - prd
 
 jobs:
   build:
