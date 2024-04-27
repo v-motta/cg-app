@@ -17,7 +17,7 @@ jobs:
         run: docker build -t ${{ github.repository }} .
 
       - name: Save Docker image
-        run: docker save ${{ github.repository }} > ${{ github.repository }}.tar
+        run: docker save ${{ github.repository }} -o ${{ github.repository }}.tar
 
       - name: List files
         run: ls -la
