@@ -29,14 +29,15 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           scp -o StrictHostKeyChecking=no ${{ vars.DOCKER_IMAGE }}.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/bin/traefik
 
-      - name: Load Docker image on remote server
+      - name: Load and remove Docker image on remote server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
           docker load -i ~/bin/traefik/${{ vars.DOCKER_IMAGE }}.tar
+          rm ~/bin/traefik/${{ vars.DOCKER_IMAGE }}.tar
           ENDSSH
 
       - name: Run Docker container on remote server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
-          sh ~/bin/traefik/run-cg-app-react.sh
+          sh ~/bin/traefik/run-cg-app.sh
           ENDSSH
