@@ -34,7 +34,7 @@ jobs:
     needs: build
     steps:
       - name: List files
-        run: ls -l /github/workspace
+        run: ls -l
 
       - name: List more files
         run: ls -l /tmp
