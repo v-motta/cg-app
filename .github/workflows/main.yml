@@ -19,9 +19,15 @@ jobs:
       - name: Save Docker image as tar file
         run: docker save -o cg-app-react.tar cg-app-react:latest
 
-      - name: Copy Docker image to remote host
+      - name: Copy Docker image to remote server
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           scp -o StrictHostKeyChecking=no cg-app-react.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/bin/traefik
+
+      - name: Load Docker image on remote server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
+          docker load -i ~/bin/traefik/cg-app-react.tar
+          ENDSSH
