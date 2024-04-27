@@ -17,11 +17,11 @@ jobs:
         run: docker build -t ${{ github.repository }} .
 
       - name: Copy file to the server
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          timeout: 10m
-          script: sh ~/bin/traefik/run-cg-app-react.sh
+          key: ${{ secrets.SSH_KEY }}
+          source: "docker.io/v-motta/cg-app-react"
+          target: "~/bin/traefik"
