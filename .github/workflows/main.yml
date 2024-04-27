@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - prd
-  pull_request:
-    branches:
-      - prd
 
 jobs:
   build:
