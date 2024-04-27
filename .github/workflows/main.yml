@@ -20,10 +20,8 @@ jobs:
         run: docker save -o cg-app-react.tar cg-app-react:latest
 
       - name: Copy Docker image to remote host
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "cg-app-react.tar"
-          target: "~/bin/traefik"
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          scp -o StrictHostKeyChecking=no cg-app-react.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/bin/traefik
