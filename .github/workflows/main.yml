@@ -23,21 +23,6 @@ jobs:
           tags: cg-app-react:latest
           outputs: type=docker,dest=/tmp/cg-app-react.tar
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.3.3
-        with:
-          name: cg-app-react
-          path: /tmp/cg-app-react.tar
-
-  scp:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: List files
-        run: ls -l
-
-      - name: List more files
-        run: ls -l /tmp
       # - name: Copy file to the server
       #   uses: appleboy/scp-action@v0.1.7
       #   with:
