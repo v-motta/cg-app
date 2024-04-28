@@ -175,7 +175,10 @@ function CardRegister() {
               placeholder="admin@costguardian.com"
               {...register("email", {
                 required: "Preencha este campo",
-                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                pattern: {
+                  value: /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/,
+                  message: "Please enter a valid email",
+                },
                 maxLength: {
                   value: 255,
                   message: "Digite menos de 255 caracteres",
