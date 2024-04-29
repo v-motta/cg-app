@@ -13,7 +13,6 @@ import { Link, NavLink } from "react-router-dom";
 import { LangToggle } from "@/components/lang-toggle";
 import { useTranslation } from "react-i18next";
 import { ModeToggle } from "./mode-toggle";
-import { useEffect } from "react";
 
 function Navbar() {
   const { t } = useTranslation();
@@ -21,18 +20,13 @@ function Navbar() {
   const menuLinks = [
     {
       label: t("dashboard"),
-      href: "/dash",
+      href: "/",
     },
     {
       label: t("costs"),
       href: "/costs",
     },
   ]
-
-  useEffect(() => {
-    console.log('first');
-  }, [])
-
 
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
