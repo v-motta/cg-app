@@ -9,12 +9,24 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CircleUser, Menu, Package2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { LangToggle } from "@/components/lang-toggle";
 import { useTranslation } from "react-i18next";
+import { ModeToggle } from "./mode-toggle";
 
 function Navbar() {
   const { t } = useTranslation();
+
+  const menuLinks = [
+    {
+      label: t("dashboard"),
+      href: "/",
+    },
+    {
+      label: t("costs"),
+      href: "/costs",
+    },
+  ]
 
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -26,18 +38,15 @@ function Navbar() {
           <Package2 className="h-6 w-6" />
           <span className="sr-only">Acme Inc</span>
         </Link>
-        <Link
-          to="#"
-          className="text-foreground transition-colors hover:text-foreground"
-        >
-          {t("dashboard")}
-        </Link>
-        <Link
-          to="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          {t("costs")}
-        </Link>
+        {menuLinks.map((link) => (
+          <NavLink
+            key={link.href}
+            to={link.href}
+            className={({ isActive }) => isActive ? "text-foreground" : "text-muted-foreground" + " " + "hover:text-foreground"}
+          >
+            {link.label}
+          </NavLink>
+        ))}
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -55,15 +64,15 @@ function Navbar() {
               <Package2 className="h-6 w-6" />
               <span className="sr-only">Acme Inc</span>
             </Link>
-            <Link to="#" className="hover:text-foreground">
-              Dashboard
-            </Link>
-            <Link
-              to="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Orders
-            </Link>
+            {menuLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
         </SheetContent>
       </Sheet>
@@ -85,6 +94,7 @@ function Navbar() {
           </DropdownMenuContent>
         </DropdownMenu>
         <LangToggle />
+        <ModeToggle />
       </div>
     </header>
   );
