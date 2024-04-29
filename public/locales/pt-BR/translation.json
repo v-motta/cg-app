@@ -1,3 +1,5 @@
 {
-    "title": "Bem vindo ao react usando react-i18next"
+    "title": "Bem vindo ao react usando react-i18next",
+    "dashboard": "Painel",
+    "costs": "Gastos"
 }
