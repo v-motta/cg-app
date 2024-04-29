@@ -10,6 +10,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CircleUser, Menu, Package2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LangToggle } from "@/components/lang-toggle";
 
 function Navbar() {
   return (
@@ -99,7 +100,7 @@ function Navbar() {
           </nav>
         </SheetContent>
       </Sheet>
-      <div className="flex w-full justify-end md:ml-auto">
+      <div className="flex w-full justify-end gap-2 md:ml-auto">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
@@ -116,6 +117,7 @@ function Navbar() {
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        <LangToggle />
       </div>
     </header>
   );
