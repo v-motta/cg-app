@@ -19,7 +19,7 @@ export function LangToggle() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="outline" size="icon">
                     <GlobeIcon className="h-5 w-5" />
                     <span className="sr-only">Escolha o tema</span>
                 </Button>
