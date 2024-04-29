@@ -1,4 +1,3 @@
-import Navbar from "@/components/navbar";
 import { useTranslation } from "react-i18next";
 
 function Home() {
@@ -6,7 +5,6 @@ function Home() {
 
   return (
     <>
-      <Navbar />
       <p>{t('title')}</p>
     </>
   );
