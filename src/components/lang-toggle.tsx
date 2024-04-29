@@ -7,8 +7,15 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslation } from "react-i18next";
 
 export function LangToggle() {
+    const { i18n } = useTranslation();
+
+    const changeLanguage = (lng: string) => {
+        i18n.changeLanguage(lng);
+    }
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -18,10 +25,10 @@ export function LangToggle() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => { }}>
+                <DropdownMenuItem onClick={() => changeLanguage('en')}>
                     English
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => { }}>
+                <DropdownMenuItem onClick={() => changeLanguage('pt-BR')}>
                     Português (BR)
                 </DropdownMenuItem>
             </DropdownMenuContent>
