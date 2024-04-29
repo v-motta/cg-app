@@ -11,8 +11,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CircleUser, Menu, Package2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { LangToggle } from "@/components/lang-toggle";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
+  const { t } = useTranslation();
+
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -27,31 +30,13 @@ function Navbar() {
           to="#"
           className="text-foreground transition-colors hover:text-foreground"
         >
-          Dashboard
+          {t("dashboard")}
         </Link>
         <Link
           to="#"
           className="text-muted-foreground transition-colors hover:text-foreground"
         >
-          Orders
-        </Link>
-        <Link
-          to="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Products
-        </Link>
-        <Link
-          to="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Customers
-        </Link>
-        <Link
-          to="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Analytics
+          {t("costs")}
         </Link>
       </nav>
       <Sheet>
@@ -78,24 +63,6 @@ function Navbar() {
               className="text-muted-foreground hover:text-foreground"
             >
               Orders
-            </Link>
-            <Link
-              to="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Products
-            </Link>
-            <Link
-              to="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Customers
-            </Link>
-            <Link
-              to="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Analytics
             </Link>
           </nav>
         </SheetContent>
