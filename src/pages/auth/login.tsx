@@ -5,7 +5,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LoginInputs, RegisterInputs } from "@/models/auth";
+import { LoginInputs, LoginResponse, RegisterInputs } from "@/models/auth";
+import api from "@/services/api";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 function Login() {
@@ -39,7 +40,18 @@ function CardLogin() {
     control,
     formState: { errors },
   } = useForm<LoginInputs>();
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<LoginInputs> = (data) => authenticate(data);
+
+  const authenticate = (data: LoginInputs) => {
+    api.post<LoginResponse>("/login", data).then((response) => {
+      sessionStorage.setItem("name", response.data.name);
+      sessionStorage.setItem("token", response.data.token);
+      sessionStorage.setItem("username", response.data.username);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
 
   return (
     <Card>
