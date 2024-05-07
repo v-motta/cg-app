@@ -24,17 +24,17 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          scp -o StrictHostKeyChecking=no ${{ vars.DOCKER_IMAGE }}.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/bin/traefik
+          scp -o StrictHostKeyChecking=no ${{ vars.DOCKER_IMAGE }}.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
 
       - name: Load and remove Docker image on remote server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
-          docker load -i ~/bin/traefik/${{ vars.DOCKER_IMAGE }}.tar
-          rm ~/bin/traefik/${{ vars.DOCKER_IMAGE }}.tar
+          docker load -i ${{ secrets.SSH_PATH }}/${{ vars.DOCKER_IMAGE }}.tar
+          rm ${{ secrets.SSH_PATH }}/${{ vars.DOCKER_IMAGE }}.tar
           ENDSSH
 
       - name: Run Docker container on remote server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
-          sh ~/bin/traefik/run-cg-app.sh
+          sh ${{ secrets.SSH_PATH }}/run-${{ vars.DOCKER_IMAGE }}.sh
           ENDSSH
