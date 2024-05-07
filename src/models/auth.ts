@@ -10,3 +10,9 @@ export type RegisterInputs = {
   email: string;
   password: string;
 };
+
+export type LoginResponse = {
+  name: string;
+  token: string;
+  username: string;
+}

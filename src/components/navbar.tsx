@@ -12,7 +12,7 @@ import { CircleUser, Menu, Package2 } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { LangToggle } from "@/components/lang-toggle";
 import { useTranslation } from "react-i18next";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 
 function Navbar() {
   const { t } = useTranslation();
